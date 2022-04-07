@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Bienvenidos!</h1>
-	<a href="formulario">Formulario</a>
+	<h1>Hello - Spring MVC!</h1>
 	
 </body>
 </html>

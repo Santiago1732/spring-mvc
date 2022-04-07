@@ -5,32 +5,50 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloWorldController {
 	
-//	Generamos un formulario para crear informacion
-	@RequestMapping(value="/formulario")
-	public String formulaario() {
-		return "formulario";
+//necesito un controlador para mostrar un formulario de html.
+	@RequestMapping("/showForm")
+	public String showForm(){
+		return "hello-world-form";
 	}
 	
-//	Generamos metodo que procese esa informacion
-	@RequestMapping(value="/procesarInformacion")
-	public String procesarInformacion() {
-		return "informacionProcesada";
+	
+//	necesito un metodo que procese el formulario html
+	@RequestMapping("/processForm")
+	public String processForm() {
+		return "helloworld";
 	}
 	
-	@RequestMapping(value="/infoModel")
-	public String infoModel(HttpServletRequest request, Model model) {
+	@RequestMapping("/processFormVersionTwo")
+	public String processFormVersionTwo(HttpServletRequest request, Model model) {
 		
-		String nombre = request.getParameter("nombre");
+		String theName = request.getParameter("studentName");
 		
-		nombre = nombre.toLowerCase();
+		theName = theName.toUpperCase();
 		
-		model.addAttribute(nombre);
+		String result = "Mi nombre en mayuscula: "+ theName;
 		
-		return "informacionProcesada";
+		model.addAttribute("message", result);
+		
+		return "helloworld";
+		
 	}
-
+	
+	
+	@RequestMapping("/procesarInfoVersionTres")
+	public String processFormVersionTwo(
+			@RequestParam("studentName") String theName, Model model) {
+		
+		theName = theName.toUpperCase();	
+		String result = "Mi nombre en mayuscula: "+ theName;
+		
+		model.addAttribute("message", result);
+		
+		return "helloworld";
+	}
+	
 }
